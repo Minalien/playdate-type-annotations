@@ -3002,6 +3002,7 @@ function playdate.geometry.vector2D:rightNormal() end
 ---|`playdate.graphics.kColorBlack`
 ---|`playdate.graphics.kColorWhite`
 ---|`playdate.graphics.kColorClear`
+---|`playdate.graphics.kColorXOR`
 
 --#region Contexts
 
@@ -3436,6 +3437,640 @@ function playdate.graphics.checkAlphaCollision(image1, x1, y1, flip1, image2, x2
 --#endregion
 
 --#region Color & Pattern
+
+--[[
+	Sets and gets the current drawing color for primitives.
+
+	This color applies to drawing primitive shapes such as lines and rectangles, not bitmap images.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setColor
+]]
+---@param color PlaydateColor
+function playdate.graphics.setColor(color) end
+
+--[[
+	Gets the current drawing color for primitives.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.getColor
+]]
+---@return PlaydateColor
+function playdate.graphics.getColor() end
+
+--[[
+	Sets the color used for drawing the background, if necessary, before playdate.graphics.sprites are drawn on top.
+
+	Use kColorClear if you intend to draw behind sprites.
+
+	Equivalent to `playdate->graphics->setBackgroundColor()` in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setBackgroundColor
+]]
+---@param color PlaydateColor
+function playdate.graphics.setBackgroundColor(color) end
+
+--[[
+	Gets the color used for drawing the background, if necessary, before playdate.graphics.sprites are drawn on top.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.getBackgroundColor
+]]
+---@return PlaydateColor
+function playdate.graphics.getBackgroundColor() end
+
+--[[
+	Sets the 8x8 pattern used for drawing.
+
+	Alternatively, uses the given playdate.graphics.image to set the 8 x 8 pattern used for drawing. The optional x, y offset (default 0, 0) indicates the top left corner of the 8 x 8 pattern.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setPattern
+]]
+---@param pattern_or_image playdate.graphics.image|integer[] An array of 8 numbers describing the bitmap for each row; for example, { 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55 } specifies a checkerboard pattern. An additional 8 numbers can be specified for an alpha mask bitmap.
+---@param x? number
+---@param y? number
+function playdate.graphics.setPattern(pattern_or_image, x, y) end
+
+--[[
+	Sets the pattern used for drawing to a dithered pattern. If the current drawing color is white, the pattern is white pixels on a transparent background and (due to a bug) the alpha value is inverted: 1.0 is transparent and 0 is opaque. Otherwise, the pattern is black pixels on a transparent background and alpha 0 is transparent while 1.0 is opaque.
+
+	The optional ditherType argument is a dither type as used in playdate.graphics.image:blurredImage(), and should be an ordered dither type; i.e., line, screen, or Bayer.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setDitherPattern
+]]
+---@param alpha number
+---@param ditherType DitherType
+function playdate.graphics.setDitherPattern(alpha, ditherType) end
+
+--#endregion
+
+--#region Drawing
+
+--[[
+	playdate.graphics.drawLine(ls)
+
+	Draws a line from (x1, y1) to (x2, y2), or draws the playdate.geometry.lineSegment ls.
+
+	Line width is specified by `setLineWidth()`. End cap style is specified by `setLineCapStyle()`.
+
+	Equivalent to `playdate->graphics->drawLine()` in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawLine
+]]
+---@param x1 number
+---@param y1 number
+---@param x2 number
+---@param y2 number
+function playdate.graphics.drawLine(x1, y1, x2, y2) end
+
+---@alias LineCapStyle
+---|`playdate.graphics.kLineCapStyleButt`
+---|`playdate.graphics.kLineCapStyleRound`
+---|`playdate.graphics.kLineCapStyleSquare`
+
+--[[
+	Specifies the shape of the endpoints drawn by drawLine.
+
+	Equivalent to playdate->graphics->setLineCapStyle() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setLineCapStyle
+]]
+---@param style LineCapStyle
+function playdate.graphics.setLineCapStyle(style) end
+
+--[[
+	Draw a single pixel in the current color at (x, y).
+
+	playdate.graphics.drawPixel(p)
+
+	Draw a single pixel in the current color at playdate.geometry.point p.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawPixel
+]]
+---@param x_or_point integer|playdate.geometry.point
+---@param y? integer
+function playdate.graphics.drawPixel(x_or_point, y) end
+
+--[[
+	Draws the rect r or the rect with origin (x, y) with a size of (w, h).
+
+	Line width is specified by setLineWidth(). Stroke location is specified by setStrokeLocation().
+
+	Equivalent to playdate->graphics->drawRect() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param w? integer
+---@param h? integer
+function playdate.graphics.drawRect(x, y, w, h) end
+
+--[[
+	Draws the filled rectangle r or the rect at (x, y) of the given width and height.
+
+	Equivalent to playdate->graphics->fillRect() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.fillRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param width? integer
+---@param height? integer
+function playdate.graphics.fillRect(x, y, width, height) end
+
+--[[
+	Draws a rectangle with rounded corners in the rect r or the rect with origin (x, y) and size (w, h).
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawRoundRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y integer|number
+---@param w? integer
+---@param h? integer
+---@param radius? number Corner radius
+function playdate.graphics.drawRoundRect(x, y, w, h, radius) end
+
+--[[
+	Draws a filled rectangle with rounded corners in the rect r or the rect with origin (x, y) and size (w, h).
+
+	https://sdk.play.date/inside-playdate/#f-graphics.fillRoundRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y integer|number
+---@param w? integer
+---@param h? integer
+---@param radius? number Corner radius
+function playdate.graphics.fillRoundRect(x, y, w, h, radius) end
+
+--[[
+	Draws an arc using the current color.
+
+	Angles are specified in degrees, not radians.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawArc
+]]
+---@param x integer|playdate.geometry.arc
+---@param y? integer
+---@param radius? number
+---@param startAngle? number
+---@param endAngle? number
+function playdate.graphics.drawArc(x, y, radius, startAngle, endAngle) end
+
+--[[
+	Draws a circle at the point (x, y) (or p) with radius radius.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawCircleAtPoint
+]]
+---@param x integer|playdate.geometry.point
+---@param y? integer
+---@param radius? number
+function playdate.graphics.drawCircleAtPoint(x, y, radius) end
+
+--[[
+	Draws a circle in the rect r or the rect with origin (x, y) and size (width, height).
+
+	If the rect is not a square, the circle will be drawn centered in the rect.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawCircleInRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param width? integer
+---@param height? integer
+function playdate.graphics.drawCircleInRect(x, y, width, height) end
+
+--[[
+	Draws a filled circle at the point (x, y) (or p) with radius radius.
+
+	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.fillCircleAtPoint
+]]
+---@param x integer|playdate.geometry.point
+---@param y integer|number
+---@param radius? number
+function playdate.graphics.fillCircleAtPoint(x, y, radius) end
+
+--[[
+	Draws a filled circle in the rect r or the rect with origin (x, y) and size (width, height).
+
+	If the rect is not a square, the circle will be drawn centered in the rect.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.fillCircleInRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param width? integer
+---@param height? integer
+function playdate.graphics.fillCircleInRect(x, y, width, height) end
+
+--[[
+	Draws an ellipse in the rect r or the rect with origin (x, y) and size (width, height).
+
+	startAngle and endAngle, if provided, should be in degrees (not radians), and will cause only the segment of the ellipse between startAngle and endAngle to be drawn.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawEllipseInRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer|number
+---@param width? integer|number
+---@param height? integer
+---@param startAngle? number
+---@param endAngle? number
+function playdate.graphics.drawEllipseInRect(x, y, width, height, startAngle, endAngle) end
+
+--[[
+	Draws a filled ellipse in the rect r or the rect with origin (x, y) and size (width, height).
+
+	startAngle and endAngle, if provided, should be in degrees (not radians), and will cause only the segment of the ellipse between startAngle and endAngle to be drawn.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.fillEllipseInRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer|number
+---@param width? integer|number
+---@param height? integer
+---@param startAngle? number
+---@param endAngle? number
+function playdate.graphics.fillEllipseInRect(x, y, width, height, startAngle, endAngle) end
+
+--[[
+	Draw the playdate.geometry.polygon p.
+
+	Line width is specified by setLineWidth().
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawPolygon
+	https://sdk.play.date/inside-playdate/#playdate-graphics-drawpolygon-x1-y1-x2-y2-draw-the-polygon-speci
+]]
+---@param p playdate.geometry.polygon|number
+---@param ... number
+function playdate.graphics.drawPolygon(p, ...) end
+
+--[[
+	Fills the polygon specified by a list of x,y coordinates.
+
+	Equivalent to playdate->graphics->fillPolygon() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.fillPolygon
+	https://sdk.play.date/inside-playdate/#playdate-graphics-fillpolygon-p-fills-the-polygon-specified-by-t
+]]
+---@param p playdate.geometry.polygon|number
+---@param ... number
+function playdate.graphics.fillPolygon(p, ...) end
+
+--[[
+	Sets the winding rule for filling polygons, one of:
+
+    playdate.graphics.kPolygonFillNonZero
+    playdate.graphics.kPolygonFillEvenOdd
+
+	See https://en.wikipedia.org/wiki/Nonzero-rule for an explanation of the winding rule.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setPolygonFillRule
+]]
+---@param rule PolygonFillRule
+function playdate.graphics.setPolygonFillRule(rule) end
+
+--[[
+	Draws a triangle with vertices (x1, y1), (x2, y2), and (x3, y3).
+
+	https://sdk.play.date/inside-playdate/#f-graphics.drawTriangle
+]]
+---@param x1 number
+---@param y1 number
+---@param x2 number
+---@param y2 number
+---@param x3 number
+---@param y3 number
+function playdate.graphics.drawTriangle(x1, y1, x2, y2, x3, y3) end
+
+--[[
+	Draws a filled triangle with vertices (x1, y1), (x2, y2), and (x3, y3).
+
+	Equivalent to playdate->graphics->fillTriangle() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.fillTriangle
+]]
+---@param x1 number
+---@param y1 number
+---@param x2 number
+---@param y2 number
+---@param x3 number
+---@param y3 number
+function playdate.graphics.fillTriangle(x1, y1, x2, y2, x3, y3) end
+
+--[[
+	A "9 slice" is a rectangular image that is made "stretchable" by being sliced into nine pieces — the four corners, the four edges, and the center.
+
+	https://sdk.play.date/inside-playdate/#C-graphics.nineSlice
+]]
+---@class playdate.graphics.nineSlice
+playdate.graphics.nineSlice = {}
+
+--[[
+	Returns a new 9 slice image from the image at imagePath with the stretchable region defined by other parameters. The arguments represent the origin and dimensions of the innermost ("center") slice.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.nineSlice.new
+]]
+---@param imagePath string
+---@param innerX number
+---@param innerY number
+---@param innerWidth number
+---@param innerHeight number
+---@return playdate.graphics.nineSlice
+function playdate.graphics.nineSlice.new(imagePath, innerX, innerY, innerWidth, innerHeight) end
+
+--[[
+	Returns the size of the 9 slice image as a pair (width, height).
+
+	https://sdk.play.date/inside-playdate/#m-graphics.nineSlice.getSize
+]]
+---@return number width, number height
+function playdate.graphics.nineSlice:getSize() end
+
+--[[
+	Returns the minimum size of the 9 slice image as a pair (width, height).
+
+	https://sdk.play.date/inside-playdate/#m-graphics.nineSlice.getMinSize
+]]
+---@return number width, number height
+function playdate.graphics.nineSlice:getMinSize() end
+
+--[[
+	Draws the 9 slice image at the desired coordinates by stretching the defined region to achieve the width and height inputs.
+
+	https://sdk.play.date/inside-playdate/#m-graphics.nineSlice.drawInRect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param width? number
+---@param height? number
+function playdate.graphics.nineSlice:drawInRect(x, y, width, height) end
+
+--[[
+	Returns the Perlin value (from 0.0 to 1.0) at position (x, y, z).
+
+	If rep is greater than 0, the pattern of noise will repeat at that point on all 3 axes.
+
+	octaves is the number of octaves of noise to apply. Compute time increases linearly with each additional octave, but the results are a bit more organic, consisting of a combination of larger and smaller variations.
+
+	When using more than one octave, persistence is a value from 0.0 - 1.0 describing the amount the amplitude is scaled each octave. The lower the value of persistence, the less influence each successive octave has on the final value.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.perlin
+]]
+---@param x number
+---@param y number
+---@param z number
+---@param rep number
+---@param octaves? number
+---@param persistence? number
+---@return number
+function playdate.graphics.perlin(x, y, z, rep, octaves, persistence) end
+
+--[[
+	Returns an array of Perlin values at once, avoiding the performance penalty of calling perlin() multiple times in a loop.
+
+	The parameters are the same as perlin() except:
+
+	dx, dy, and dz are how far to step along the x, y, and z axes in each iteration.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.perlinArray
+]]
+---@param count integer number of values to be returned.
+---@param x number
+---@param dx number
+---@param y? number
+---@param dy? number
+---@param z? number
+---@param dz? number
+---@param rep? number
+---@param octaves? number
+---@param persistence? number
+---@return number[]
+function playdate.graphics.perlinArray(count, x, dx, y, dy, z, dz, rep, octaves, persistence) end
+
+--[[
+	You must import CoreLibs/qrcode to use this function.
+
+	Asynchronously returns an image representing a QR code for the passed-in string to the function callback. The arguments passed to the callback are image, errorMessage. (If an errorMessage string is returned, image will be nil.)
+
+	desiredEdgeDimension lets you specify an approximate edge dimension in pixels for the desired QR code, though the function has limited flexibility in sizing QR codes, based on the amount of information to be encoded, and the restrictions of a 1-bit screen. The function will attempt to generate a QR code smaller than desiredEdgeDimension if possible. (Note that QR codes always have the same width and height.)
+
+	If you specify nil for desiredEdgeDimension, the returned image will balance small size with easy readability. If you specify 0, the returned image will be the smallest possible QR code for the specified string.
+
+	generateQRCode() will return a reference to the timer it uses to run asynchronously. If you wish to stop execution of the background process generating the QR code, call :remove() on that returned timer.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.generateQRCode
+]]
+---@param stringToEncode string
+---@param desiredEdgeDimension integer
+---@param callback fun()
+function playdate.graphics.generateQRCode(stringToEncode, desiredEdgeDimension, callback) end
+
+--[[
+	You must import CoreLibs/graphics to use this function.
+
+	Draws an approximation of a sine wave between the points startX, startY and endX, endY.
+
+    startAmplitude: The number of pixels above and below the line from startX, startY and endX, endY the peaks and valleys of the wave will be drawn at the start of the wave.
+
+    endAmplitude: The number of pixels above and below the line from startX, startY and endX, endY the peaks and valleys of the wave will be drawn at the end of the wave.
+
+    period: The distance between peaks, in pixels.
+
+    phaseShift: If provided, specifies the wave’s offset, in pixels.
+
+	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.drawSineWave
+]]
+---@param startX number
+---@param startY number
+---@param endX number
+---@param endY number
+---@param startAmplitude number
+---@param endAmplitude number
+---@param period number
+---@param phaseShift? number
+function playdate.graphics.drawSineWave(startX, startY, endX, endY, startAmplitude, endAmplitude, period, phaseShift) end
+
+--#endregion
+
+--#region Drawing Modifiers
+
+--[[
+	Sets the clipping rectangle for all subsequent graphics drawing, including bitmaps. The argument can either be separate dimensions or a playdate.geometry.rect object. The clip rect is automatically cleared at the beginning of the playdate.update() callback. The function uses world coordinates; that is, the given rectangle will be translated by the current drawing offset. To use screen coordinates instead, use setScreenClipRect()
+
+	Equivalent to playdate->graphics->setClipRect() in the C API.
+
+	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.setClipRect
+	https://sdk.play.date/inside-playdate/#f-graphics.setClipRect-rect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param width? integer
+---@param height? integer
+function playdate.graphics.setClipRect(x, y, width, height) end
+
+--[[
+	Returns multiple values (x, y, width, height) giving the current clipping rectangle.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.getClipRect
+]]
+---@return integer x, integer y, integer width, integer height
+function playdate.graphics.getClipRect() end
+
+--[[
+	Sets the clip rectangle as above, but uses screen coordinates instead of world coordinates—​that is, it ignores the current drawing offset.
+
+	Equivalent to playdate->graphics->setScreenClipRect() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setScreenClipRect
+	https://sdk.play.date/inside-playdate/#f-graphics.setScreenClipRect-rect
+]]
+---@param x integer|playdate.geometry.rect
+---@param y? integer
+---@param width? integer
+---@param height? integer
+function playdate.graphics.setScreenClipRect(x, y, width, height) end
+
+--[[
+	Gets the clip rectangle as above, but uses screen coordinates instead of world coordinates—​that is, it ignores the current drawing offset.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.getScreenClipRect
+]]
+---@return integer x, integer y, integer width, integer height
+function playdate.graphics.getScreenClipRect() end
+
+--[[
+	Clears the current clipping rectangle, set with setClipRect().
+
+	Equivalent to playdate->graphics->clearClipRect() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.clearClipRect
+]]
+function playdate.graphics.clearClipRect() end
+
+--[[
+	Sets the current stencil to the given image. If tile is set, the the stencil will be tiled; in this case, the image width must be a multiple of 32 pixels.
+
+	Equivalent to playdate->graphics->setStencilImage() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setStencilImage
+]]
+---@param image playdate.graphics.image
+---@param tile? boolean
+function playdate.graphics.setStencilImage(image, tile) end
+
+--- TODO: Verify the actual typing here.
+--[[
+	Sets a pattern to use for stenciled drawing, as an alternative to creating an image, drawing a pattern into the image, then using that in setStencilImage().
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setStencilPattern
+	https://sdk.play.date/inside-playdate/#playdate-graphics-setstencilpattern-row1-row2-row3-row4-row5-row
+	https://sdk.play.date/inside-playdate/#f-graphics.setStencilPattern-dither
+]]
+---@param ... any
+function playdate.graphics.setStencilPattern(...) end
+
+--[[
+	Clears the stencil buffer.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.clearStencil
+]]
+function playdate.graphics.clearStencil() end
+
+---@alias DrawMode
+---|`playdate.graphics.kDrawModeCopy`
+---|`playdate.graphics.kDrawModeWhiteTransparent`
+---|`playdate.graphics.kDrawModeBlackTransparent`
+---|`playdate.graphics.kDrawModeFillWhite`
+---|`playdate.graphics.kDrawModeFillBlack`
+---|`playdate.graphics.kDrawModeXOR`
+---|`playdate.graphics.kDrawModeNXOR`
+---|`playdate.graphics.kDrawModeInverted`
+---|"copy"
+---|"inverted"
+---|"XOR"
+---|"NXOR"
+---|"whiteTransparent"
+---|"blackTransparent"
+---|"fillWhite"
+---|"fillBlack"
+
+--[[
+	Sets the current drawing mode for images.
+
+	The draw mode applies to images and fonts (which are technically images). The draw mode does not apply to primitive shapes such as lines or rectangles.
+
+	Equivalent to playdate->graphics->setDrawMode() in the C API.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setImageDrawMode
+]]
+---@param mode DrawMode
+function playdate.graphics.setImageDrawMode(mode) end
+
+--[[
+	Gets the current drawing mode for images.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.getImageDrawMode
+]]
+---@return DrawMode
+function playdate.graphics.getImageDrawMode() end
+
+--[[
+	Sets the width of the line for drawLine, drawRect, drawPolygon, and drawArc when a playdate.geometry.arc is passed as the argument.
+
+	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.setLineWidth
+]]
+---@param width number
+function playdate.graphics.setLineWidth(width) end
+
+--[[
+	Gets the width of the line for drawLine, drawRect, drawPolygon, and drawArc when a playdate.geometry.arc is passed as the argument.
+
+	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.getLineWidth
+]]
+---@return number
+function playdate.graphics.getLineWidth() end
+
+---@alias StrokeLocation
+---|`playdate.graphics.kStrokeCentered`
+---|`playdate.graphics.kStrokeOutside`
+---|`playdate.graphics.kStrokeInside`
+
+--[[
+	Specifies where the stroke is placed relative to the rectangle passed into drawRect.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.setStrokeLocation
+]]
+---@param location StrokeLocation
+function playdate.graphics.setStrokeLocation(location) end
+
+--[[
+	Gets stroke position relative to the rectangle passed into drawRect.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.getStrokeLocation
+]]
+---@return StrokeLocation
+function playdate.graphics.getStrokeLocation() end
+
+--#endregion
+
+--#region Offscreen Drawing
+
+--[[
+	lockFocus() routes all drawing to the given playdate.graphics.image. playdate.graphics.unlockFocus() returns drawing to the frame buffer.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.lockFocus
+]]
+---@param image playdate.graphics.image
+function playdate.graphics.lockFocus(image) end
+
+--[[
+	After calling unlockFocus(), drawing is routed to the frame buffer.
+
+	https://sdk.play.date/inside-playdate/#f-graphics.unlockFocus
+]]
+function playdate.graphics.unlockFocus() end
+
+--#endregion
+
+--#region Animation
 --#endregion
 
 --#endregion
