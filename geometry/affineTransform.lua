@@ -33,13 +33,14 @@ playdate.geometry.affineTransform = {}
 	https://sdk.play.date/inside-playdate/#f-geometry.affineTransform.new
 	https://sdk.play.date/inside-playdate/#f-geometry.affineTransform.new-1
 ]]
----@param m11? number
----@param m12? number
----@param m21? number
----@param m22? number
----@param tx? number
----@param ty? number
----@return playdate.geometry.affineTransform()
+---@param m11 number
+---@param m12 number
+---@param m21 number
+---@param m22 number
+---@param tx number
+---@param ty number
+---@return playdate.geometry.affineTransform
+---@overload fun(): playdate.geometry.affineTransform
 function playdate.geometry.affineTransform.new(m11, m12, m21, m22, tx, ty) end
 
 --[[

@@ -35,7 +35,9 @@ playdate.geometry.polygon = {}
 
 	https://sdk.play.date/inside-playdate/#f-geometry.polygon.new
 ]]
----@param ... number|playdate.geometry.point
+---@param ... number
+---@return playdate.geometry.polygon
+---@overload fun(p: playdate.geometry.point): playdate.geometry.polygon
 function playdate.geometry.polygon.new(...) end
 
 --[[
@@ -68,10 +70,11 @@ function playdate.geometry.polygon:isClosed() end
 
 	https://sdk.play.date/inside-playdate/#m-geometry.polygon.containsPoint
 ]]
----@param x number|playdate.geometry.point
----@param y? number|PolygonFillRule
+---@param x number
+---@param y number
 ---@param fillRule? PolygonFillRule
 ---@return boolean
+---@overload fun(p: playdate.geometry.point, fillRule?: PolygonFillRule): boolean
 function playdate.geometry.polygon:containsPoint(x, y, fillRule) end
 
 --[[

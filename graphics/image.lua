@@ -26,11 +26,12 @@
 	https://sdk.play.date/inside-playdate/#f-graphics.image.new
 	https://sdk.play.date/inside-playdate/#f-graphics.image.new-path
 ]]
----@param path_or_width integer|string
----@param height? integer
+---@param width integer
+---@param height integer
 ---@param bgColor? PlaydateColor
 ---@return playdate.graphics.image
-function playdate.graphics.image.new(path_or_width, height, bgColor) end
+---@overload fun(path: string): playdate.graphics.image
+function playdate.graphics.image.new(width, height, bgColor) end
 
 --[[
 	Loads a new image from the data at path into an already-existing image, without allocating additional memory. The image at path must be of the same dimensions as the original.
