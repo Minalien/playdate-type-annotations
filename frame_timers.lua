@@ -36,10 +36,10 @@ playdate.frameTimer = {}
 ---@field value number Current value calculated from the start and end values, the current frame, and the easing function.
 ---@field startValue number Start value used when calculating value.
 ---@field endValue number End value used when calculating value.
----@field easingFunction fun(...) The function used to calculate value. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or endValue - startValue), and d is the duration.
+---@field easingFunction EasingFunction The function used to calculate value. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or endValue - startValue), and d is the duration.
 ---@field easingAmplitude number|nil For easing functions in CoreLibs/easing that take additional amplitude and period arguments (such as inOutElastic), set these to desired values.
 ---@field easingPeriod number|nil For easing functions in CoreLibs/easing that take additional amplitude and period arguments (such as inOutElastic), set these to desired values.
----@field reverseEasingFunction fun(...) Set to provide an easing function to be used for the reverse portion of the timer. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or endValue - startValue), and d is the duration.
+---@field reverseEasingFunction EasingFunction Set to provide an easing function to be used for the reverse portion of the timer. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or endValue - startValue), and d is the duration.
 
 --[[
 	This should be called from the main playdate.update() loop to drive the frame timers.
@@ -62,7 +62,7 @@ function playdate.frameTimer.updateTimers() end
 ---@param duration integer
 ---@param startValue number
 ---@param endValue number
----@param easingFunction? fun(...)
+---@param easingFunction? EasingFunction
 ---@return ValueFrameTimer
 ---@overload fun(duration: integer): ValueFrameTimer
 ---@overload fun(duration: integer, callback: fun(...), ...): playdate.frameTimer

@@ -13,6 +13,11 @@
 ]]
 ---@meta
 
+---@alias EasingFunction
+---|fun(elapsedTime: number, beginningValue: number, changeInValue: number, duration: number)
+---|fun(elapsedTime: number, beginningValue: number, changeInValue: number, duration: number, amplitude: number, period: number)
+---|fun(elapsedTime: number, beginningValue: number, changeInValue: number, duration: number, overshoot: number)
+
 --[[
 	A set of easing functions to aid with animation timing.
 

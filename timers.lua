@@ -33,10 +33,10 @@ playdate.timer = {}
 
 ---@class ValueTimer : playdate.timer
 ---@field value number Current value calculated from the start and end values, the time elapsed, and the easing function.
----@field easingFunction fun(...) The function used to calculate value. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
+---@field easingFunction EasingFunction The function used to calculate value. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
 ---@field easingAmplitude number|nil For easing functions that take additional amplitude and period arguments (such as inOutElastic), set these to the desired values.
 ---@field easingPeriod number|nil For easing functions that take additional amplitude and period arguments (such as inOutElastic), set these to the desired values.
----@field reverseEasingFunction fun(...) Set to provide an easing function to be used for the reverse portion of the timer. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
+---@field reverseEasingFunction EasingFunction Set to provide an easing function to be used for the reverse portion of the timer. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
 ---@field startValue number Start value used when calculating value.
 ---@field endValue number End value used when calculating value.
 
@@ -62,7 +62,7 @@ function playdate.timer.updateTimers() end
 ---@param duration integer
 ---@param startValue number
 ---@param endValue number
----@param easingFunction? fun(...)
+---@param easingFunction? EasingFunction
 ---@return ValueTimer
 ---@overload fun(duration: integer): ValueTimer
 ---@overload fun(duration: integer, callback: fun(...), ...): playdate.timer

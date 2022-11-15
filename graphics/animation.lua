@@ -111,12 +111,12 @@ playdate.graphics.animator = {}
 ---@param duration integer Total time of the animation in milliseconds.
 ---@param startValue number|playdate.geometry.point
 ---@param endValue number|playdate.geometry.point
----@param easingFunction? fun(...) if supplied, should be a value from `playdate.easingFunctions`. If your easing function requires additional variables s, a, or p, set them on the animator directly after creation.
+---@param easingFunction? EasingFunction if supplied, should be a value from `playdate.easingFunctions`. If your easing function requires additional variables s, a, or p, set them on the animator directly after creation.
 ---@param startTimeOffset? integer If supplied, will shift the start time of the animation by the specified number of milliseconds. If positive, the animation will be delayed. If negative, the animation will effectively have started before the moment the animator is instantiated.
----@overload fun(duration: integer, lineSegment: playdate.geometry.lineSegment, easingFunction?: fun(...), startTimeOffset?: integer)
----@overload fun(duration: integer, arc: playdate.geometry.arc, easingFunction?: fun(...), startTimeOffset?: integer)
----@overload fun(duration: integer, polygon: playdate.geometry.polygon, easingFunction?: fun(...), startTimeOffset?: integer)
----@overload fun(duration: integer, parts: playdate.geometry.lineSegment[]|playdate.geometry.arc[]|playdate.geometry.polygon[], easingFunction?: fun(...), startTimeOffset?: integer)
+---@overload fun(duration: integer, lineSegment: playdate.geometry.lineSegment, easingFunction?: EasingFunction, startTimeOffset?: integer)
+---@overload fun(duration: integer, arc: playdate.geometry.arc, easingFunction?: EasingFunction, startTimeOffset?: integer)
+---@overload fun(duration: integer, polygon: playdate.geometry.polygon, easingFunction?: EasingFunction, startTimeOffset?: integer)
+---@overload fun(duration: integer, parts: playdate.geometry.lineSegment[]|playdate.geometry.arc[]|playdate.geometry.polygon[], easingFunction?: EasingFunction, startTimeOffset?: integer)
 function playdate.graphics.animator.new(duration, startValue, endValue, easingFunction, startTimeOffset) end
 
 --[[
