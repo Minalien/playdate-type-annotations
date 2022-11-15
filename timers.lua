@@ -19,13 +19,6 @@
 	https://sdk.play.date/inside-playdate/#C-timer
 ]]
 ---@class playdate.timer
----@field value number Current value calculated from the start and end values, the time elapsed, and the easing function.
----@field easingFunction fun(...) The function used to calculate value. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
----@field easingAmplitude number|nil For easing functions that take additional amplitude and period arguments (such as inOutElastic), set these to the desired values.
----@field easingPeriod number|nil For easing functions that take additional amplitude and period arguments (such as inOutElastic), set these to the desired values.
----@field reverseEasingFunction fun(...) Set to provide an easing function to be used for the reverse portion of the timer. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
----@field startValue number Start value used when calculating value.
----@field endValue number End value used when calculating value.
 ---@field currentTime number The number of milliseconds the timer has been running. Read-only.
 ---@field delay integer Number of milliseconds to wait before starting the timer.
 ---@field discardOnCompletion boolean If true, the timer is discarded once it is complete. Defaults to true.
@@ -37,6 +30,15 @@
 ---@field timerEndedArgs any[] For repeating timers, this function will be called each time the timer completes, before it starts again. An array-style table of values that will be passed to the timerEndedCallback function.
 ---@field updateCallback fun(...) A callback function that will be called on every frame (every time timer.updateAll() is called). If the timer was created with arguments, those will be passed as arguments to the function provided. Otherwise, the timer is passed as the single argument.
 playdate.timer = {}
+
+---@class ValueTimer : playdate.timer
+---@field value number Current value calculated from the start and end values, the time elapsed, and the easing function.
+---@field easingFunction fun(...) The function used to calculate value. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
+---@field easingAmplitude number|nil For easing functions that take additional amplitude and period arguments (such as inOutElastic), set these to the desired values.
+---@field easingPeriod number|nil For easing functions that take additional amplitude and period arguments (such as inOutElastic), set these to the desired values.
+---@field reverseEasingFunction fun(...) Set to provide an easing function to be used for the reverse portion of the timer. The function should be of the form function(t, b, c, d), where t is elapsed time, b is the beginning value, c is the change (or end value - start value), and d is the duration. Many such functions are available in playdate.easingFunctions.
+---@field startValue number Start value used when calculating value.
+---@field endValue number End value used when calculating value.
 
 --[[
 	This should be called from the main playdate.update() loop to drive the timers.
@@ -61,8 +63,8 @@ function playdate.timer.updateTimers() end
 ---@param startValue number
 ---@param endValue number
 ---@param easingFunction? fun(...)
----@return playdate.timer
----@overload fun(duration: integer): playdate.timer
+---@return ValueTimer
+---@overload fun(duration: integer): ValueTimer
 ---@overload fun(duration: integer, callback: fun(...), ...): playdate.timer
 function playdate.timer.new(duration, startValue, endValue, easingFunction) end
 
