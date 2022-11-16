@@ -40,6 +40,7 @@ playdate.geometry.arc = {}
 ---@param startAngle number
 ---@param endAngle number
 ---@param direction boolean Should be true for clockwise, false for counterclockwise. If not specified, the direction is inferred from the start and end angles.
+---@return playdate.geometry.arc
 function playdate.geometry.arc.new(x, y, radius, startAngle, endAngle, direction) end
 
 --[[
