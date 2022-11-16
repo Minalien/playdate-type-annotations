@@ -1189,6 +1189,209 @@ function playdate.sound.resetTime() end
 ---@class playdate.sound.synth : playdate.sound.source
 playdate.sound.synth = {}
 
+---@alias SynthWaveform
+---|`playdate.sound.kWaveSine`
+---|`playdate.sound.kWaveSquare`
+---|`playdate.sound.kWaveSawtooth`
+---|`playdate.sound.kWaveTriangle`
+---|`playdate.sound.kWaveNoise`
+---|`playdate.sound.kWavePOPhase`
+---|`playdate.sound.kWavePODigital`
+---|`playdate.sound.kWavePOVosim`
+
+--[[
+	Returns a new synth object to play a Sample. An optional sustain region defines a loop to play while the note is on. Sample data must be uncompressed PCM, not ADPCM.
+
+	Alternatively, returns a new synth object to play a waveform. See playdate.sound.synth:setWaveform for waveform types.
+
+	https://sdk.play.date/inside-playdate/#f-sound.synth.new.sample
+	https://sdk.play.date/inside-playdate/#f-sound.synth.new.waveform
+]]
+---@param sample playdate.sound.sample
+---@param sustainStart? number
+---@param sustainEnd? number
+---@return playdate.sound.synth
+---@overload fun(waveform: SynthWaveform): playdate.sound.synth
+function playdate.sound.synth.new(sample, sustainStart, sustainEnd) end
+
+--[[
+	Returns a copy of the given synth.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.copy
+]]
+---@return playdate.sound.synth
+function playdate.sound.synth:copy() end
+
+--[[
+	Plays a note with the current waveform or sample.
+
+	The function returns true if the synth was successfully added to the sound channel, otherwise false (i.e., if the channel is full).
+
+	If pitch is zero, this function calls noteOff() instead of potentially adding a non-zero sample, or DC offset, to the output.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.playNote
+]]
+---@param pitch number the pitch value is in Hertz. If a sample is playing, pitch=261.63 (C4) plays at normal speed in either function, a string like Db3 can be used instead of a number
+---@param volume? number 0 to 1, defaults to 1
+---@param length? number in seconds. If omitted, note will play until you call noteOff()
+---@param when? number seconds since the sound engine started (see playdate.sound.getCurrentTime). Defaults to the current time.
+function playdate.sound.synth:playNote(pitch, volume, length, when) end
+
+--[[
+	Identical to playNote but uses a note name like "C4", or MIDI note number (60=C4, 61=C#4, etc.). In the latter case, fractional values are allowed.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.playMIDINote
+]]
+---@param note string|number
+---@param volume? number
+---@param length? number
+---@param when? number
+function playdate.sound.synth:playMIDINote(note, volume, length, when) end
+
+--[[
+	Releases the note, if one is playing. The note will continue to be voiced through the release section of the synth’s envelope.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.noteOff
+]]
+function playdate.sound.synth:noteOff() end
+
+--[[
+	Stops the synth immediately, without playing the release part of the envelope.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.stop
+]]
+function playdate.sound.synth:stop() end
+
+--[[
+	Returns true if the synth is still playing, including the release phase of the envelope.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.isPlaying
+]]
+---@return boolean
+function playdate.sound.synth:isPlaying() end
+
+--[[
+	Sets the attack time, decay time, sustain level, and release time for the sound envelope.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setADSR
+]]
+---@param attack number
+---@param decay number
+---@param sustain number
+---@param release number
+function playdate.sound.synth:setADSR(attack, decay, sustain, release) end
+
+--[[
+	Sets the signal to use as the amplitude modulator.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setAmplitudeMod
+]]
+---@param signal playdate.sound.signal
+function playdate.sound.synth:setAmplitudeMod(signal) end
+
+--[[
+	Sets the attack time, in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setAttack
+]]
+---@param time number
+function playdate.sound.synth:setAttack(time) end
+
+--[[
+	Sets the decay time, in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setDecay
+]]
+---@param time number
+function playdate.sound.synth:setDecay(time) end
+
+--[[
+	Sets a function to be called when the synth stops playing.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setFinishCallback
+]]
+---@param fun fun()
+function playdate.sound.synth:setFinishCallback(fun) end
+
+--[[
+	Sets the signal to use as the frequency modulator.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setFrequencyMod
+]]
+---@param signal playdate.sound.signal
+function playdate.sound.synth:setFrequencyMod(signal) end
+
+--[[
+	Sets whether to use legato phrasing for the synth. If the legato flag is set and a new note starts while a previous note is still playing, the synth’s envelope remains in the sustain phase instead of starting a new attack.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setLegato
+]]
+---@param flag boolean
+function playdate.sound.synth:setLegato(flag) end
+
+--[[
+	Some synth types have extra parameters: The square wave’s one parameter is its duty cycle; the TE synths each have two parameters that change some quality of the sound. Parameter numbers start at 1. value ranges from 0 to 1.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setParameter
+]]
+---@param parameter integer
+---@param value number
+function playdate.sound.synth:setParameter(parameter, value) end
+
+--[[
+	Sets the signal to modulate the parameter.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setParameterMod
+]]
+---@param parameter integer
+---@param signal playdate.sound.signal
+function playdate.sound.synth:setParameterMod(parameter, signal) end
+
+--[[
+	Sets the release time, in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setRelease
+]]
+---@param time number
+function playdate.sound.synth:setRelease(time) end
+
+--[[
+	Sets the sustain level, as a proportion of the total level (0.0 to 1.0).
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setSustain
+]]
+---@param level number
+function playdate.sound.synth:setSustain(level) end
+
+--[[
+	Sets the synth volume. If a single value is passed in, sets both left side and right side volume to the given value. If two values are given, volumes are set separately.
+
+	Volume values are between 0.0 and 1.0.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setVolume
+]]
+---@param left number
+---@param right? number
+function playdate.sound.synth:setVolume(left, right) end
+
+--[[
+	Returns the current volume for the synth, a single value for mono sources or a pair of values (left, right) for stereo sources.
+
+	Volume values are between 0.0 and 1.0.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.getVolume
+]]
+---@return number left, number|nil right
+function playdate.sound.synth:getVolume() end
+
+--[[
+	Sets the waveform or Sample the synth plays. If a sample is given, its data must be uncompressed PCM, not ADPCM.
+
+	https://sdk.play.date/inside-playdate/#m-sound.synth.setWaveform
+]]
+---@param waveform SynthWaveform|playdate.sound.sample
+function playdate.sound.synth:setWaveform(waveform) end
+
 --#endregion
 
 --#region LFO
