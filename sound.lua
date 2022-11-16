@@ -1396,8 +1396,104 @@ function playdate.sound.synth:setWaveform(waveform) end
 
 --#region LFO
 
+---@alias LFOType
+---|`playdate.sound.kLFOSquare`
+---|`playdate.sound.kLFOSawtoothUp`
+---|`playdate.sound.kLFOSawtoothDown`
+---|`playdate.sound.kLFOTriangle`
+---|`playdate.sound.kLFOSine`
+---|`playdate.sound.kLFOSampleAndHold`
+
 ---@class playdate.sound.lfo : playdate.sound.signal
 playdate.sound.lfo = {}
+
+--[[
+	Returns a new LFO object, which can be used to modulate sounds. See playdate.sound.lfo:setType() for LFO types.
+
+	https://sdk.play.date/inside-playdate/#f-sound.lfo.new
+]]
+---@param type? LFOType
+---@return playdate.sound.lfo
+function playdate.sound.lfo.new(type) end
+
+--[[
+	Sets the waveform of the LFO. Valid values are
+		playdate.sound.kLFOSquare
+		playdate.sound.kLFOSawtoothUp
+		playdate.sound.kLFOSawtoothDown
+		playdate.sound.kLFOTriangle
+		playdate.sound.kLFOSine
+		playdate.sound.kLFOSampleAndHold
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setType
+]]
+---@param type LFOType
+function playdate.sound.lfo:setType(type) end
+
+--[[
+	Sets the LFO type to arpeggio, where the given values are in half-steps from the center note. For example, the sequence (0, 4, 7, 12) plays the notes of a major chord.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setArpeggio
+]]
+---@param ... integer
+function playdate.sound.lfo:setArpeggio(...) end
+
+--[[
+	Sets the center value of the LFO.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setCenter
+]]
+---@param center number
+function playdate.sound.lfo:setCenter(center) end
+
+--[[
+	Sets the depth of the LFO’s modulation.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setDepth
+]]
+---@param depth number
+function playdate.sound.lfo:setDepth(depth) end
+
+--[[
+	Sets the rate of the LFO, in cycles per second.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setRate
+]]
+---@param rate number
+function playdate.sound.lfo:setRate(rate) end
+
+--[[
+	Sets the current phase of the LFO, from 0 to 1.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setPhase
+]]
+---@param phase number
+function playdate.sound.lfo:setPhase(phase) end
+
+--[[
+	If an LFO is marked global, it is continuously updated whether or not it’s attached to any source.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setGlobal
+]]
+---@param flag boolean
+function playdate.sound.lfo:setGlobal(flag) end
+
+--[[
+	If retrigger is on, the LFO’s phase is reset to 0 when a synth using the LFO starts playing a note.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setRetrigger
+]]
+---@param flag boolean
+function playdate.sound.lfo:setRetrigger(flag) end
+
+--[[
+	Sets an initial holdoff time for the LFO where the LFO remains at its center value, and a ramp time where the value increases linearly to its maximum depth. Values are in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.lfo.setDelay
+]]
+---@param holdoff number
+---@param ramp number
+function playdate.sound.lfo:setDelay(holdoff, ramp) end
 
 --#endregion
 
@@ -1405,6 +1501,100 @@ playdate.sound.lfo = {}
 
 ---@class playdate.sound.envelope : playdate.sound.signal
 playdate.sound.envelope = {}
+
+--[[
+	Creates a new envelope with the given (optional) parameters.
+
+	https://sdk.play.date/inside-playdate/#f-sound.envelope.new
+]]
+---@param attack number
+---@param decay number
+---@param sustain number
+---@param release number
+---@return playdate.sound.envelope
+---@overload fun(): playdate.sound.envelope
+function playdate.sound.envelope.new(attack, decay, sustain, release) end
+
+--[[
+	Sets the envelope attack time to attack, in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setAttack
+]]
+---@param attack number
+function playdate.sound.envelope:setAttack(attack) end
+
+--[[
+	Sets the envelope decay time to decay, in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setDecay
+]]
+---@param decay number
+function playdate.sound.envelope:setDecay(decay) end
+
+--[[
+	Sets the envelope sustain level to sustain, as a proportion of the maximum. For example, if the sustain level is 0.5, the signal value rises to its full value over the attack phase of the envelope, then drops to half its maximum over the decay phase, and remains there while the envelope is active.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setSustain
+]]
+---@param sustain number
+function playdate.sound.envelope:setSustain(sustain) end
+
+--[[
+	Sets the envelope release time to attack, in seconds.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setRelease
+]]
+---@param release number
+function playdate.sound.envelope:setRelease(release) end
+
+--[[
+	Sets scale values to the envelope. The transformed envelope has an initial value of offset and a maximum (minimum if scale is negative) of offset + scale.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setScale
+]]
+---@param scale number
+function playdate.sound.envelope:setScale(scale) end
+
+--[[
+	Sets scale and offset values to the envelope. The transformed envelope has an initial value of offset and a maximum (minimum if scale is negative) of offset + scale.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setOffset
+]]
+---@param offset number
+function playdate.sound.envelope:setOffset(offset) end
+
+--[[
+	Sets whether to use legato phrasing for the envelope. If the legato flag is set, when the envelope is re-triggered before it’s released, it remains in the sustain phase instead of jumping back to the attack phase.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setLegato
+]]
+---@param flag boolean
+function playdate.sound.envelope:setLegato(flag) end
+
+--[[
+	If retrigger is on, the envelope always starts from 0 when a note starts playing, instead of the current value if it’s active.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setRetrigger
+]]
+---@param flag boolean
+function playdate.sound.envelope:setRetrigger(flag) end
+
+--[[
+	Triggers the envelope at the given velocity. If a length parameter is given, the envelope moves to the release phase after the given time. Otherwise, the envelope is held in the sustain phase until the trigger function is called again with velocity equal to zero.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.trigger
+]]
+---@param velocity number
+---@param length? number
+function playdate.sound.envelope:trigger(velocity, length) end
+
+--[[
+	If an envelope is marked global, it is continuously updated whether or not it’s attached to any source.
+
+	https://sdk.play.date/inside-playdate/#m-sound.envelope.setGlobal
+]]
+---@param flag boolean
+function playdate.sound.envelope:setGlobal(flag) end
 
 --#endregion
 
