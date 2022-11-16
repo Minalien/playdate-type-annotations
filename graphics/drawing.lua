@@ -14,8 +14,6 @@
 ---@meta
 
 --[[
-	playdate.graphics.drawLine(ls)
-
 	Draws a line from (x1, y1) to (x2, y2), or draws the playdate.geometry.lineSegment ls.
 
 	Line width is specified by `setLineWidth()`. End cap style is specified by `setLineCapStyle()`.
@@ -28,6 +26,7 @@
 ---@param y1 number
 ---@param x2 number
 ---@param y2 number
+---@overload fun(ls: playdate.geometry.lineSegment)
 function playdate.graphics.drawLine(x1, y1, x2, y2) end
 
 ---@alias LineCapStyle
@@ -54,9 +53,10 @@ function playdate.graphics.setLineCapStyle(style) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawPixel
 ]]
----@param x_or_point integer|playdate.geometry.point
----@param y? integer
-function playdate.graphics.drawPixel(x_or_point, y) end
+---@param x integer
+---@param y integer
+---@overload fun(p: playdate.geometry.point)
+function playdate.graphics.drawPixel(x, y) end
 
 --[[
 	Draws the rect r or the rect with origin (x, y) with a size of (w, h).
@@ -67,10 +67,11 @@ function playdate.graphics.drawPixel(x_or_point, y) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param w? integer
----@param h? integer
+---@param x integer
+---@param y integer
+---@param w integer
+---@param h integer
+---@overload fun(rect: playdate.geometry.rect)
 function playdate.graphics.drawRect(x, y, w, h) end
 
 --[[
@@ -80,10 +81,11 @@ function playdate.graphics.drawRect(x, y, w, h) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.fillRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param width? integer
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
+---@overload fun(rect: playdate.geometry.rect)
 function playdate.graphics.fillRect(x, y, width, height) end
 
 --[[
@@ -91,11 +93,12 @@ function playdate.graphics.fillRect(x, y, width, height) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawRoundRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y integer|number
----@param w? integer
----@param h? integer
----@param radius? number Corner radius
+---@param x integer
+---@param y integer
+---@param w integer
+---@param h integer
+---@param radius number
+---@overload fun(rect: playdate.geometry.rect, radius: number)
 function playdate.graphics.drawRoundRect(x, y, w, h, radius) end
 
 --[[
@@ -103,11 +106,12 @@ function playdate.graphics.drawRoundRect(x, y, w, h, radius) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.fillRoundRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y integer|number
----@param w? integer
----@param h? integer
----@param radius? number Corner radius
+---@param x integer
+---@param y integer
+---@param w integer
+---@param h integer
+---@param radius number
+---@overload fun(rect: playdate.geometry.rect, radius: number)
 function playdate.graphics.fillRoundRect(x, y, w, h, radius) end
 
 --[[
@@ -117,11 +121,12 @@ function playdate.graphics.fillRoundRect(x, y, w, h, radius) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawArc
 ]]
----@param x integer|playdate.geometry.arc
----@param y? integer
----@param radius? number
----@param startAngle? number
----@param endAngle? number
+---@param x integer
+---@param y integer
+---@param radius number
+---@param startAngle number
+---@param endAngle number
+---@overload fun(arc: playdate.geometry.arc)
 function playdate.graphics.drawArc(x, y, radius, startAngle, endAngle) end
 
 --[[
@@ -129,9 +134,10 @@ function playdate.graphics.drawArc(x, y, radius, startAngle, endAngle) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawCircleAtPoint
 ]]
----@param x integer|playdate.geometry.point
----@param y? integer
----@param radius? number
+---@param x integer
+---@param y integer
+---@param radius number
+---@overload fun(p: playdate.geometry.point, radius: number)
 function playdate.graphics.drawCircleAtPoint(x, y, radius) end
 
 --[[
@@ -141,10 +147,11 @@ function playdate.graphics.drawCircleAtPoint(x, y, radius) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawCircleInRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param width? integer
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
+---@overload fun(rect: playdate.geometry.rect)
 function playdate.graphics.drawCircleInRect(x, y, width, height) end
 
 --[[
@@ -152,9 +159,10 @@ function playdate.graphics.drawCircleInRect(x, y, width, height) end
 
 	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.fillCircleAtPoint
 ]]
----@param x integer|playdate.geometry.point
----@param y integer|number
----@param radius? number
+---@param x integer
+---@param y integer
+---@param radius number
+---@overload fun(p: playdate.geometry.point, radius: number)
 function playdate.graphics.fillCircleAtPoint(x, y, radius) end
 
 --[[
@@ -164,10 +172,11 @@ function playdate.graphics.fillCircleAtPoint(x, y, radius) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.fillCircleInRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param width? integer
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
+---@overload fun(r: playdate.geometry.rect)
 function playdate.graphics.fillCircleInRect(x, y, width, height) end
 
 --[[
@@ -177,12 +186,13 @@ function playdate.graphics.fillCircleInRect(x, y, width, height) end
 
 	https://sdk.play.date/inside-playdate/#f-graphics.drawEllipseInRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer|number
----@param width? integer|number
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
 ---@param startAngle? number
 ---@param endAngle? number
+---@overload fun(rect: playdate.geometry.rect, startAngle?: number, endAngle?: number)
 function playdate.graphics.drawEllipseInRect(x, y, width, height, startAngle, endAngle) end
 
 --[[
@@ -192,12 +202,13 @@ function playdate.graphics.drawEllipseInRect(x, y, width, height, startAngle, en
 
 	https://sdk.play.date/inside-playdate/#f-graphics.fillEllipseInRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer|number
----@param width? integer|number
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
 ---@param startAngle? number
 ---@param endAngle? number
+---@overload fun(rect: playdate.geometry.rect, startAngle?: number, endAngle?: number)
 function playdate.graphics.fillEllipseInRect(x, y, width, height, startAngle, endAngle) end
 
 --[[
@@ -208,9 +219,9 @@ function playdate.graphics.fillEllipseInRect(x, y, width, height, startAngle, en
 	https://sdk.play.date/inside-playdate/#f-graphics.drawPolygon
 	https://sdk.play.date/inside-playdate/#playdate-graphics-drawpolygon-x1-y1-x2-y2-draw-the-polygon-speci
 ]]
----@param p playdate.geometry.polygon|number
----@param ... number
-function playdate.graphics.drawPolygon(p, ...) end
+---@param p playdate.geometry.polygon
+---@overload fun(...: number)
+function playdate.graphics.drawPolygon(p) end
 
 --[[
 	Fills the polygon specified by a list of x,y coordinates.
@@ -220,9 +231,9 @@ function playdate.graphics.drawPolygon(p, ...) end
 	https://sdk.play.date/inside-playdate/#f-graphics.fillPolygon
 	https://sdk.play.date/inside-playdate/#playdate-graphics-fillpolygon-p-fills-the-polygon-specified-by-t
 ]]
----@param p playdate.geometry.polygon|number
----@param ... number
-function playdate.graphics.fillPolygon(p, ...) end
+---@param p playdate.geometry.polygon
+---@overload fun(...: number)
+function playdate.graphics.fillPolygon(p) end
 
 --[[
 	Sets the winding rule for filling polygons, one of:
@@ -307,10 +318,11 @@ function playdate.graphics.nineSlice:getMinSize() end
 
 	https://sdk.play.date/inside-playdate/#m-graphics.nineSlice.drawInRect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param width? number
----@param height? number
+---@param x integer
+---@param y integer
+---@param width number
+---@param height number
+---@overload fun(rect: playdate.geometry.rect)
 function playdate.graphics.nineSlice:drawInRect(x, y, width, height) end
 
 --[[
@@ -328,9 +340,10 @@ function playdate.graphics.nineSlice:drawInRect(x, y, width, height) end
 ---@param y number
 ---@param z number
 ---@param rep number
----@param octaves? number
----@param persistence? number
+---@param octaves number
+---@param persistence number
 ---@return number
+---@overload fun(x: number, y: number, z: number, rep: number)
 function playdate.graphics.perlin(x, y, z, rep, octaves, persistence) end
 
 --[[
@@ -345,14 +358,15 @@ function playdate.graphics.perlin(x, y, z, rep, octaves, persistence) end
 ---@param count integer number of values to be returned.
 ---@param x number
 ---@param dx number
----@param y? number
----@param dy? number
----@param z? number
----@param dz? number
----@param rep? number
----@param octaves? number
----@param persistence? number
+---@param y number
+---@param dy number
+---@param z number
+---@param dz number
+---@param rep number
+---@param octaves number
+---@param persistence number
 ---@return number[]
+---@overload fun(count: integer, x: number, dx: number)
 function playdate.graphics.perlinArray(count, x, dx, y, dy, z, dz, rep, octaves, persistence) end
 
 --[[

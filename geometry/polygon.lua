@@ -37,7 +37,8 @@ playdate.geometry.polygon = {}
 ]]
 ---@param ... number
 ---@return playdate.geometry.polygon
----@overload fun(p: playdate.geometry.point): playdate.geometry.polygon
+---@overload fun(...: playdate.geometry.point): playdate.geometry.polygon
+---@overload fun(numberOfVertices: integer): playdate.geometry.polygon
 function playdate.geometry.polygon.new(...) end
 
 --[[

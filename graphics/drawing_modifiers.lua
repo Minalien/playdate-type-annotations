@@ -21,10 +21,11 @@
 	https://sdk.play.date/1.12.3/Inside%20Playdate.html#f-graphics.setClipRect
 	https://sdk.play.date/inside-playdate/#f-graphics.setClipRect-rect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param width? integer
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
+---@overload fun(rect: playdate.geometry.rect)
 function playdate.graphics.setClipRect(x, y, width, height) end
 
 --[[
@@ -43,10 +44,11 @@ function playdate.graphics.getClipRect() end
 	https://sdk.play.date/inside-playdate/#f-graphics.setScreenClipRect
 	https://sdk.play.date/inside-playdate/#f-graphics.setScreenClipRect-rect
 ]]
----@param x integer|playdate.geometry.rect
----@param y? integer
----@param width? integer
----@param height? integer
+---@param x integer
+---@param y integer
+---@param width integer
+---@param height integer
+---@overload fun(rect: playdate.geometry.rect)
 function playdate.graphics.setScreenClipRect(x, y, width, height) end
 
 --[[

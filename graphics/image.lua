@@ -290,12 +290,13 @@ function playdate.graphics.image:clearMask(opaque) end
 
 	https://sdk.play.date/inside-playdate/#m-graphics.image.drawTiled
 ]]
----@param x number|playdate.geometry.rect
----@param y_or_flip? number|ImageFlip
----@param width? number
----@param height? number
+---@param x number
+---@param y number
+---@param width number
+---@param height number
 ---@param flip? ImageFlip
-function playdate.graphics.image:drawTiled(x, y_or_flip, width, height, flip) end
+---@overload fun(rect: playdate.geometry.rect, flip?: ImageFlip)
+function playdate.graphics.image:drawTiled(x, y, width, height, flip)  end
 
 ---@alias DitherType
 ---|`playdate.graphics.image.kDitherTypeNone`
