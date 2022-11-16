@@ -3,7 +3,14 @@ A set of EmmyLua-style type annotations for the PlayDate Lua SDK, mainly intende
 
 ## Usage
 ### Setup
-Simply place playdate-type-annotations as a git submodule or regular folder outside of your `source` directory, and the sumneko Lua extension should automatically pick up the appropriate type annotations in your other source files.
+Place `playdate-type-annotations` as a git submodule or regular folder outside of your `source` directory, and add the following to your `.vscode/settings.json` file to have the sumneko Lua extension pick up the appropriate type annotations in your other source files.
+
+```json
+	"Lua.workspace.library": [
+		"$PLAYDATE_SDK_PATH",
+		"playdate-type-annotations"
+	],
+```
 
 **You should not import any of these files in your project source code.**
 
