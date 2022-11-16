@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/inside-playdate/#M-pathfinder
 ]]
----@class playdate.pathfinder.graph
+---@class playdate.pathfinder.graph : Object
 playdate.pathfinder.graph = {}
 
 --[[

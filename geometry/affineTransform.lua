@@ -21,7 +21,7 @@
 	[m21 m22 ty]
 	[ 0   0  1 ]
 ]]
----@class playdate.geometry.affineTransform
+---@class playdate.geometry.affineTransform : Object
 ---@operator mul(playdate.geometry.affineTransform): playdate.geometry.affineTransform
 ---@operator mul(playdate.geometry.vector2D): playdate.geometry.vector2D
 ---@operator mul(playdate.geometry.point): playdate.geometry.point

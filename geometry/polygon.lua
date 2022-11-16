@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/1.12.3/Inside%20Playdate.html#C-geometry.polygon
 ]]
----@class playdate.geometry.polygon
+---@class playdate.geometry.polygon : Object
 ---@operator mul(playdate.geometry.affineTransform): playdate.geometry.polygon
 playdate.geometry.polygon = {}
 

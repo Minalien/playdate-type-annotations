@@ -20,7 +20,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-graphics.sprite
 ]]
----@class playdate.graphics.sprite
+---@class playdate.graphics.sprite : Object
 ---@field x integer			Do not set this properties directly. Use :moveTo() or :setBounds() instead.
 ---@field y integer			Do not set this properties directly. Use :moveTo() or :setBounds() instead.
 ---@field width integer		Do not set this properties directly. Use :moveTo() or :setBounds() instead.

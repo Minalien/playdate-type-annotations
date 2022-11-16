@@ -25,7 +25,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-ui.gridview
 ]]
----@class playdate.ui.gridview
+---@class playdate.ui.gridview : Object
 ---@field needsDisplay boolean This read-only variable returns true if the gridview needs to be redrawn. This can be used to help optimize drawing in your app. Keep in mind that a gridview cannot know all reasons it may need to be redrawn, such as changes in your drawing callback functions, coordinate or size changes, or overlapping drawing, so you may need to additionally redraw at other times.
 ---@field backgroundImage playdate.graphics.image|playdate.graphics.nineSlice A background image that draws behind the gridview’s cells. This image can be either a playdate.graphics.image which will be tiled or a playdate.nineSlice.
 ---@field isScrolling boolean Read-only. True if the gridview is currently performing a scroll animation.

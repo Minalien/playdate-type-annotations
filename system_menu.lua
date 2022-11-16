@@ -13,10 +13,10 @@
 ]]
 ---@meta
 
----@class playdate.menu
+---@class playdate.menu : Object
 playdate.menu = {}
 
----@class playdate.menu.item
+---@class playdate.menu.item : Object
 ---@field title string Title of the menu item.
 ---@field value integer|boolean|string Current value for the menu item.
 playdate.menu.item = {}

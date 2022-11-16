@@ -16,7 +16,7 @@
 --[[
 	https://sdk.play.date/inside-playdate/#C-playdate.pathfinder.node
 ]]
----@class playdate.pathfinder.node
+---@class playdate.pathfinder.node : Object
 ---@field id integer
 ---@field x integer
 ---@field y integer

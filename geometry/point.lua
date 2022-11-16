@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-geometry.point
 ]]
----@class playdate.geometry.point
+---@class playdate.geometry.point : Object
 ---@field x number
 ---@field y number
 ---@operator add(playdate.geometry.vector2D): playdate.geometry.point

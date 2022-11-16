@@ -13,7 +13,7 @@
 ]]
 ---@meta
 
----@class playdate.graphics.video
+---@class playdate.graphics.video : Object
 playdate.graphics.video = {}
 
 --[[

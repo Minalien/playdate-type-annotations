@@ -20,7 +20,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-graphics.animation.loop
 ]]
----@class playdate.graphics.animation.loop
+---@class playdate.graphics.animation.loop : Object
 ---@field imageTable playdate.graphics.imagetable|nil
 ---@field delay integer Delay before moving to the next frame, in ms
 ---@field startFrame integer Frame the object resets to when the loop completes
@@ -87,7 +87,7 @@ function playdate.graphics.animation.loop:setImageTable(imageTable) end
 
 	https://sdk.play.date/inside-playdate/#C-graphics.animator
 ]]
----@class playdate.graphics.animator
+---@class playdate.graphics.animator : Object
 ---@field easingAmplitude number For easing functions that take additional amplitude (such as inOutElastic), set these values on animator instances to the desired values.
 ---@field easingPeriod number For easing functions that take additional period arguments (such as inOutElastic), set these values on animator instances to the desired values.
 ---@field repeatCount integer Indicates the number of times after the initial animation the animator should repeat; i.e., if repeatCount is set to 2, the animation will play through 3 times.
@@ -167,7 +167,7 @@ function playdate.graphics.animator:ended() end
 
 	https://sdk.play.date/inside-playdate/#C-graphics.animation.blinker
 ]]
----@class playdate.graphics.animation.blinker
+---@class playdate.graphics.animation.blinker : Object
 ---@field cycles integer Number of changes the blinker goes through before it's complete.
 ---@field counter integer Cycle the blinker is on (counts from n down to 0)
 ---@field onDuration integer Number of milliseconds the blinker is "on"

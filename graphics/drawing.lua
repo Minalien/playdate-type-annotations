@@ -281,7 +281,7 @@ function playdate.graphics.fillTriangle(x1, y1, x2, y2, x3, y3) end
 
 	https://sdk.play.date/inside-playdate/#C-graphics.nineSlice
 ]]
----@class playdate.graphics.nineSlice
+---@class playdate.graphics.nineSlice : Object
 playdate.graphics.nineSlice = {}
 
 --[[

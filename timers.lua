@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-timer
 ]]
----@class playdate.timer
+---@class playdate.timer : Object
 ---@field currentTime number The number of milliseconds the timer has been running. Read-only.
 ---@field delay integer Number of milliseconds to wait before starting the timer.
 ---@field discardOnCompletion boolean If true, the timer is discarded once it is complete. Defaults to true.

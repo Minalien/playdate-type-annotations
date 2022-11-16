@@ -20,7 +20,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-geometry.arc
 ]]
----@class playdate.geometry.arc
+---@class playdate.geometry.arc : Object
 ---@field x number
 ---@field y number
 ---@field radius number

@@ -22,7 +22,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-geometry.rect
 ]]
----@class playdate.geometry.rect
+---@class playdate.geometry.rect : Object
 ---@field x number
 ---@field y number
 ---@field width number

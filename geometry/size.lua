@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-geometry.size
 ]]
----@class playdate.geometry.size
+---@class playdate.geometry.size : Object
 ---@field width number
 ---@field height number
 playdate.geometry.size = {}

@@ -18,7 +18,7 @@
 
 	You can directly read or write x1, y1, x2, or y2 values to a lineSegment.
 ]]
----@class playdate.geometry.lineSegment
+---@class playdate.geometry.lineSegment : Object
 ---@field x1 number
 ---@field y1 number
 ---@field x2 number

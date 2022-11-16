@@ -20,7 +20,7 @@
 
 	https://sdk.play.date/inside-playdate/#M-inputHandlers
 ]]
----@class playdate.inputHandler
+---@class playdate.inputHandler : Object
 ---@field AButtonDown? fun()
 ---@field AButtonHeld? fun()
 ---@field AButtonUp? fun()

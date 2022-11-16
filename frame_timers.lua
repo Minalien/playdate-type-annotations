@@ -20,7 +20,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-frameTimer
 ]]
----@class playdate.frameTimer
+---@class playdate.frameTimer : Object
 ---@field delay integer Number of frames to wait before starting the timer.
 ---@field discardOnCompletion boolean If true, the timer is discarded once it is complete. Defaults to true.
 ---@field duration integer The number of frames for which the timer will run.

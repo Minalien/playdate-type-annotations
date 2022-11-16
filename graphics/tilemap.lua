@@ -13,7 +13,7 @@
 ]]
 ---@meta
 
----@class playdate.graphics.tilemap
+---@class playdate.graphics.tilemap : Object
 playdate.graphics.tilemap = {}
 
 --[[

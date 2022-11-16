@@ -26,7 +26,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-sound.source
 ]]
----@class playdate.sound.source
+---@class playdate.sound.source : Object
 playdate.sound.source = {}
 
 --[[
@@ -46,7 +46,7 @@ function playdate.sound.playingSources() end
 
 	https://sdk.play.date/inside-playdate/#C-sound.sample
 ]]
----@class playdate.sound.sample
+---@class playdate.sound.sample : Object
 playdate.sound.sample = {}
 
 --[[
@@ -238,7 +238,7 @@ function playdate.sound.instrument:getVolume() end
 --[[
 	https://sdk.play.date/inside-playdate/#C-sound.sequence
 ]]
----@class playdate.sound.sequence
+---@class playdate.sound.sequence : Object
 playdate.sound.sequence = {}
 
 --[[
@@ -374,7 +374,7 @@ function playdate.sound.sequence:allNotesOff() end
 
 	https://sdk.play.date/inside-playdate/#C-sound.effect
 ]]
----@class playdate.sound.effect
+---@class playdate.sound.effect : Object
 playdate.sound.effect = {}
 
 --[[
@@ -402,7 +402,7 @@ function playdate.sound.removeEffect(effect) end
 
 	https://sdk.play.date/inside-playdate/#C-sound.channel
 ]]
----@class playdate.sound.channel
+---@class playdate.sound.channel : Object
 playdate.sound.channel = {}
 
 --[[
@@ -501,7 +501,7 @@ function playdate.sound.channel:setVolumeMod(signal) end
 
 	https://sdk.play.date/inside-playdate/#C-sound.signal
 ]]
----@class playdate.sound.signal
+---@class playdate.sound.signal : Object
 playdate.sound.signal = {}
 
 --[[
@@ -967,7 +967,7 @@ function playdate.sound.controlsignal:getControllerType() end
 --[[
 	https://sdk.play.date/inside-playdate/#C-sound.track
 ]]
----@class playdate.sound.track
+---@class playdate.sound.track : Object
 playdate.sound.track = {}
 
 --[[

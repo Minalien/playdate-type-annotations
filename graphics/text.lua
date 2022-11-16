@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/1.12.3/Inside%20Playdate.html#C-graphics.font
 ]]
----@class playdate.graphics.font
+---@class playdate.graphics.font : Object
 playdate.graphics.font = {}
 
 --[[

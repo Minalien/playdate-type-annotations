@@ -18,7 +18,7 @@
 ---|`playdate.file.kFileWrite`
 ---|`playdate.file.kFileAppend`
 
----@class playdate.file.file
+---@class playdate.file.file : Object
 playdate.file.file = {}
 
 --[[

@@ -20,7 +20,7 @@
 
 	https://sdk.play.date/1.12.3/Inside%20Playdate.html#C-geometry.vector2D
 ]]
----@class playdate.geometry.vector2D
+---@class playdate.geometry.vector2D : Object
 ---@field dx number
 ---@field dy number
 ---@operator unm(): playdate.geometry.vector2D

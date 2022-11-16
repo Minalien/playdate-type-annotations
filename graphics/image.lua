@@ -18,7 +18,7 @@
 
 	https://sdk.play.date/inside-playdate/#C-graphics.image
 ]]
----@class playdate.graphics.image
+---@class playdate.graphics.image : Object
 
 --[[
 	Creates a new image from the data at path, or creates a new blank image of the given width and height. The image can be drawn on using playdate.graphics.pushContext() or playdate.graphics.lockFocus(). The optional bgcolor argument is one of the color constants as used in playdate.graphics.setColor(), defaulting to kColorClear.

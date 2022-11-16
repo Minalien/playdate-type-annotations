@@ -22,7 +22,7 @@
 
 	https://sdk.play.date/1.12.3/Inside%20Playdate.html#C-graphics.imagetable
 ]]
----@class playdate.graphics.imagetable
+---@class playdate.graphics.imagetable : Object
 ---@operator len: integer
 playdate.graphics.imagetable = {}
 -- Note: The imagetable class also supports indexing with an integer as shorthand for :getImage()
