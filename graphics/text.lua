@@ -21,6 +21,13 @@
 ---@class playdate.graphics.font : Object
 playdate.graphics.font = {}
 
+---@type integer
+playdate.graphics.font.kVariantNormal = 0
+---@type integer
+playdate.graphics.font.kVariantBold = 1
+---@type integer
+playdate.graphics.font.kVariantItalic = 2
+
 --[[
 	Returns a playdate.graphics.font object from the data at path. If there is no file at path, the function returns nil.
 
