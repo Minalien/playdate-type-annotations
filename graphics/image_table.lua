@@ -52,7 +52,7 @@ function playdate.graphics.imagetable.new(count, cellsWide, cellSize) end
 ---@param x integer
 ---@param y integer
 ---@return playdate.graphics.image
----@overload fun(n: integer): playdate.graphics.image
+---@overload fun(self: playdate.graphics.imagetable, n: integer): playdate.graphics.image
 function playdate.graphics.imagetable:getImage(x, y) end
 
 --[[

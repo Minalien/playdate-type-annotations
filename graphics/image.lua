@@ -19,6 +19,7 @@
 	https://sdk.play.date/inside-playdate/#C-graphics.image
 ]]
 ---@class playdate.graphics.image : Object
+playdate.graphics.image = {}
 
 --[[
 	Creates a new image from the data at path, or creates a new blank image of the given width and height. The image can be drawn on using playdate.graphics.pushContext() or playdate.graphics.lockFocus(). The optional bgcolor argument is one of the color constants as used in playdate.graphics.setColor(), defaulting to kColorClear.
@@ -87,10 +88,11 @@ function playdate.graphics.image.imageSizeAtPath(path) end
 
 	https://sdk.play.date/inside-playdate/#m-graphics.imgDraw
 ]]
----@param x integer|playdate.geometry.point
----@param y? integer|ImageFlip
----@param flip? ImageFlip|playdate.geometry.rect
+---@param x integer
+---@param y integer
+---@param flip? ImageFlip
 ---@param sourceRect? playdate.geometry.rect
+---@overload fun(self: playdate.graphics.image, p: playdate.geometry.point, flip?: ImageFlip, sourceRect?: playdate.geometry.rect)
 function playdate.graphics.image:draw(x, y, flip, sourceRect)  end
 
 --[[
